@@ -568,10 +568,56 @@ In both cases, we included a deliberate typo when specifying the name of the dir
 
 ---
 
-## U25: Less is more [U25]
+## U25: Jumping (Air) ship to another computer [U25]
+
+Up until this point, we have been working with the Unix system you are sitting in front of, namely your laptop. Another powerful ability of Unix systems is the ability to easily connect to other computers and run commands on them, from the command line, as if you were at the computer itself.
+
+
+Why would you want to do this? Sometimes a file or resource is only present on a particular machine. Sometimes your computer is not powerful enough to complete a complicated task, and you need a bigger and better machine. Sometimes you just don't want to keep your laptop open all night while a program runs. There are many reasons why you might want to execute commands on another machine.
+
+We are going to use the command [ssh][] to connect to another computer. `ssh` stands for **secure shell**. The _shell_ is another term for the command line. This process is _secure_ in the sense that it encrypts the communication between computers so malicious entities cannot see it.
+
+Let's `ssh` to a computer with the name `genekc03`. This is a machine on the local Stowers network.
+
+
+	$ ssh genekc03
+	The authenticity of host 'genekc03 (10.0.xx.xx)' can't be established.
+	RSA key fingerprint is ba:xx:xx:9a:58:28:94:85:68:7f:d1:2f:af.
+	Are you sure you want to continue connecting (yes/no)?
+
+What's all this? Part of what it means to be _secure_. We can type `yes` to answer the question
+
+Now it will ask for our password. This is your *Unix* password, that should have been provided to you.
+
+You should end up seeing:
+
+	jfv genekc03 ~$
+
+Where `jfv` is actually your username. You are now logged into `genekc03` ! You can practice some of the non-destructive commands in your home directory on `genekc03`.
+
+	$ pwd
+	$ ls
+	$ touch test.txt
+
+As you might expect, all the commands that worked on your Mac will work on this machine, even though it is running a completely different version of Unix.
+
+To get out of `genekc03`'s head and back to your local machine, you can type `exit`
+
+	$ exit
+	logout
+	Connection to genekc03 closed.
+
+
+[ssh]: http://en.wikipedia.org/wiki/Secure_Shell
+
+---
+
+## U26: Less is more [U26]
 
 So far we have covered listing the contents of directories and moving/copying/deleting either files and/or directories. Now we will quickly cover how you can look at files; in Unix the [less][less command] command lets you view (but not edit) text files. Let's take a look at a file of _Arabidopsis thaliana_ protein sequences:
 
+	$ ssh genekc03
+	$ cd /n/core/Bioinformatics/Unix_Course
 	$ less Data/Arabidopsis/At_proteins.fasta
 
 When you are using less, you can bring up a page of help commands by pressing `h`, scroll forward a page by pressing `space`, or go forward or backwards one line at a time by pressing `j` or `k`. To exit less, press `q` (for quit). The `less` program also does about a million other useful things (including text searching).
@@ -580,36 +626,12 @@ When you are using less, you can bring up a page of help commands by pressing `h
 
 ---
 
-## U26: Directory enquiries [U26]
-
-When you have a directory containing a mixture of files and directories, it is not often clear which is which. One solution is to use `ls -l` which will put a 'd' at the start of each line of output for items which are directories. A better solution is to use `ls -p`. This command simply adds a trailing slash character to those items which are directories. Compare the following:
-
-	$ ls 
-	Applications	Data	file1 	Code	Documentation	file2
-
-	$ ls -p 
-	Applications/	Data/	file1 	Code/	Documentation/	file2
-
-Hopefully, you'll agree that the second example makes things a little clearer. You can also do things like always capitalizing directory names (like I have done) but ideally we would suggest that you always use `ls -p`. If this sounds a bit of a pain, then it is. Ideally you want to be able to make `ls -p` the default behavior for `ls`. Luckily, there is a way of doing this by using Unix [aliases][]. It's very easy to create an alias:
-
-	$ alias ls='ls -p' 
-	$ ls 
-	Applications/	Data/	file1 	Code/	Documentation/	file2
-
-If you have trouble remembering what some of these very short Unix commands do, then aliases allow you to use human-readable alternatives. I.e. you could make a 'copy' alias for the cp command' or even make 'list_files_sorted_by_date' perform the `ls -lt` command. Note that aliases do not replace the original command. It can be dangerous to use the name of an existing command as an alias for a different command. I.e. you could make an `rm` alias that put files to a 'trash' directory by using the `mv` command. This might work for you, but what if you start working on someone else's machine who doesn't have that alias? Or what if someone else starts working on your machine?
-
-#### Task U26.1 [U26.1]
-Create an alias such that typing `rm` will always invoke `rm -i`. Try running the alias command on its own to see what happens. Now open a new terminal window (or a new tab) and try running your `ls` alias. What happens?
-
-[aliases]: http://en.wikipedia.org/wiki/Alias_(command)
-
----
-
 ## U27: Fire the editor [U27]
 
-The problem with aliases is that they only exist in the current terminal session. Once you log out, or use a new terminal window, then you'll have to retype the alias. Fortunately though, there is a way of storing settings like these. To do this, we need to be able to create a configuration file and this requires using a text editor. We could use a program like TextEdit to do this (or even Microsoft Word), but as this is a Unix course,  we will use a simple Unix editor called [`][]. Let's create a file called profile:
+We've moved, touched, copied, and looked at files so far. Now lets try editing one.
 
-	$ cd /Volumes/USB/Unix_and_Perl_course 
+	$ cd /tmp/Work
+	$ touch profile
 	$ nano profile
 
 You should see the following appear in your terminal:
@@ -619,91 +641,50 @@ You should see the following appear in your terminal:
 The bottom of the nano window shows you a list of simple commands which are all accessible by typing 'Control' plus a letter. E.g. Control + X exits the program.
 
 #### Task U27.1 [U27.1]
-Type the following text in the editor and then save it (Control + O). Nano will ask if you want to 'save the modified buffer' and then ask if you want to keep the same name. Then exit nano (Control + X) and use `less` to confirm that the profile file contains the text you added.
 
-	# some useful command line short-cuts 
-	alias ls='ls -p' 
-	alias rm='rm -i'
-
-Now you have successfully created a configuration file (called 'profile') which contains two aliases. The first line that starts with a hash (#) is a comment, these are just notes that you can add to explain what the other lines are doing. But how do you get Unix to recognize the contents of this file? The [source][] command tells Unix to read the contents of a file and treat it as a series of Unix commands (but it will ignore any comments).
-
-#### Task U27.2 [U27.2]
-Open a new terminal window or tab (to ensure that any aliases will not work) and then type the following (make sure you first change to the correct directory):
-
-	$ source profile
-
-Now try the `ls` command to see if the output looks different. Next, use `touch` to make a new file and then try deleting it with the `rm` command. Are the aliases working?
+Type some text in the editor and then save it (Control + O). Nano will ask if you want to 'save the modified buffer' and then ask if you want to keep the same name. Then exit nano (Control + X) and use `less` to confirm that the profile file contains the text you added.
 
 [nano]: http://en.wikipedia.org/wiki/Nano_(text_editor)
-[source]: http://en.wikipedia.org/wiki/Source_(command)
 
 ---
 
-## U28: Hidden treasure [U28]
+## U28: Sticking to the script [U28]
 
-In addition to adding aliases, profile files in Unix are very useful for many other reasons. We have actually already created a profile for you. It's in /Volumes/USB/Unix_and_Perl_course but you probably won't have seen it yet. That's because it is a hidden file named '.profile' (dot profile). If a filename starts with a dot, Unix will treat it as a hidden file. To see it, you  can use `ls -a` which lists all hidden files (there may be several more files that appear).
-
-#### Task U28.1 [U28.1]
-Use `less` to look at the profile file that we have created. See if you can understand what all the lines mean (any lines that start with a # are just comments). Use `source` to read this file. See how this changes the behavior of typing `cd` on its own. You can now delete the profile file that you made earlier, from now on we will use the .profile file.
-
-If you have a .profile file in your _home_ directory then it will be automatically read every time you open a new terminal. A problem for this class is your home directories are wiped each day, so we can't store files on the computer (which is why we are using the USB drive). So for this course we have to do a bit of extra work.
-
->***Remember to type:***  
-***source /Volumes/USB/Unix_and_Perl_course/.profile***  
-***every time you use a new terminal window***
-
----
-
-## U29: Sticking to the script [U29]
-
-Unix can also be used as a programming language just like Perl. Depending on what you want to do, a Unix script might solve all your problems and mean that you don't really need to learn Perl at all.
+Unix can also be used as a programming language just to let you create your own 'programs' which are really just text files with commands in them.
 
 So how do you make a Unix script (which are commonly called 'shell scripts')? At the simplest level, we just write one or more  Unix commands to a file and then treat that file as if it was any other Unix command or program.
 
-#### Task U29.1 [U29.1]
-Copy the following two lines to a file (using `nano`). Name that file hello.sh (shell scripts are typically given a .sh extension) and **make sure that you save this file in /Volumes/USB/Unix_and_Perl_course/Code**.
+#### Task U28.1 [U28.1]
+
+Copy the following two lines to a file (using `nano`). Name that file hello.sh (shell scripts are typically given a .sh extension).
 
 	# my first Unix shell script 
 	echo "Hello World"
-
-When you have done that, simply type 'hello.sh' and see what happens. If you have previously run `source .profile` then you should be able to run 'hello.sh' from any directory that you navigate to. If it worked, then it should have printed 'Hello world'. This very simple script uses the Unix command [echo][] which just prints output to the screen. Also note the comment that precedes the `echo` command, it is a good habit to add explanatory comments.
-
-#### Task U29.2 [U29.2]
-Try moving the script outside of the Code directory (maybe move it 'up' one level) and then `cd` to that directory. Now try running the script again. You should find that it doesn't work anymore. Now try running `./hello.sh` (that's a dot + slash at the beginning). It should work again.
-
-[echo]: http://en.wikipedia.org/wiki/Echo_(command)
-
----
-
-## U30: Keep to the $PATH [U30]
-
-The reason why the script worked when it was in the Code directory and then stopped working when you moved it is because we did something to make the Code directory a bit special. Remember this line that is in your .profile file?
-
-	PATH=$PATH":$HOME/Code"
-
-When you try running _any_ program in Unix, your computer will look in a set of predetermined places to see if a program by that name lives there. All Unix commands are just files that live in directories somewhere on your computer. Unix uses something called $PATH (which is an _environment variable_) to store a list of places to look for programs to run. In our .profile file we have just told Unix to also look in your Code directory. If we didn't add the Code directory to the $PATH, then we have to run the program by first typing ./ (dot slash). Remember that the dot means the current directory. Think of it as a way of forcing Unix to run a program (including Perl scripts).
-
----
-
-## U31: Ask for permission [U31]
 
 Programs in Unix need permission to be run. We will normally always have to type the following for any script that we create:
 
 	$ chmod u+x hello.sh
 
-This would use the [chmod][] to add _executable_ permissions (+x) to the file called 'hello.sh' (the 'u' means add this permission to just you, the user). Without it, your script won't run. Except that it did. One of the oddities of using the USB drive for this course, is that files copied to a USB drive have all permissions turned on by default. Just remember that you will normally need to run `chmod` on any script that you create. It's probably a good habit to get into now.
+This would use the [chmod][] to add _executable_ permissions (+x) to the file called 'hello.sh' (the 'u' means add this permission to just you, the user). Without it, your script won't run.
 
-The chmod command can also modify read and write permissions for files, and change any of the three sets of permissions (read, write, execute) at the level of 'user', 'group', and 'other'. You probably won't need to know any more about the chmod command other than you need to use it to make scripts executable.
+When you have done that, simply type 'hello.sh' and see what happens. If it worked, then it should have printed 'Hello world'. This very simple script uses the Unix command [echo][] which just prints output to the screen. Also note the comment that precedes the `echo` command which starts with the `#`. Comments are useful to people reading the script, and they are completely ignored when running the program.
 
 [chmod]: http://en.wikipedia.org/wiki/Chmod
+[echo]: http://en.wikipedia.org/wiki/Echo_(command)
 
 ---
 
-## U32: The power of shell scripts [U36]
+## U29: Ask for permission [U29]
+
+The chmod command can also modify read and write permissions for files, and change any of the three sets of permissions (read, write, execute) at the level of 'user', 'group', and 'other'. You probably won't need to know any more about the chmod command other than you need to use it to make scripts executable.
+
+---
+
+## U30: The power of shell scripts [U30]
 
 Time to make some Unix shell scripts that might actually be useful.
 
-#### Task U32.1 [U32.1]
+#### Task U30.1 [U30.1]
 Look in the Data/Unix_test_files directory. You should see several files (all are empty) and four directories. Now put the following information into a shell script (using `nano`) and save it as cleanup.sh.
 
 	#!/bin/bash
@@ -712,11 +693,12 @@ Look in the Data/Unix_test_files directory. You should see several files (all ar
 	mv *.mp3 Music 
 	mv *.fa Sequences
 
-**Make sure that this script is saved** in your `Unix_and_Perl_course/Code directory`. Now return to the `Unix_and_Perl_course/Data/Unix_test_files` directory and run this script. It should place the relevant files in the correct directories. This is a relatively simple use of shell scripting. As you can see the script just contains regular Unix commands that you might type at the command prompt. But if you had to do this type of file sorting every day, and had many different types of file, then it would save you a lot of time.
+Make sure you are in the right directory and then run this script. It should place the relevant files in the correct directories. This is a relatively simple use of shell scripting. As you can see the script just contains regular Unix commands that you might type at the command prompt. But if you had to do this type of file sorting every day, and had many different types of file, then it would save you a lot of time.
 
 Did you notice the #!/bin/bash line in this script? There are several different types of shell script in Unix, and this line makes it clearer that a) that this is actually a file that can be treated as a program and b) that it will be a bash script (bash is a type of Unix). As a general rule, all type of scriptable programming languages should have a similar line as the first line in the program.
 
-#### Task U32.2 [U32.2]
+#### Task U30.2 [U30.2]
+
 Here is another script. Copy this information into a file called change_file_extension.sh and again place that file in the Code directory.
 
 	#!/bin/bash
@@ -732,7 +714,7 @@ Now go to the `Data/Unix_test_files/Text` directory. If you have run the exercis
 
 Now run the `ls` command to see what has happened to the files in the directory. You should see that all the files that ended with 'txt' now end with 'text'. Try using this script to change the file extensions of other files.
 
-It's not essential that you understand exactly how this script works at the moment (things will become clearer as you learn Perl), but you should at least see how a relatively simple Unix shell script can be potentially very useful.
+Hopefully you can see how a relatively simple Unix shell script can be potentially very useful.
 
 ---
 
