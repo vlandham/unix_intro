@@ -417,11 +417,11 @@ In this example we create a new file ('rags') and move it to a new location and 
 
 ## U18: Stay on target [U18]
 
-It is important to understand that as long as you have specified a 'source' and a 'target' location when you are moving a file, then it doesn't matter what your current directory is. You can move or copy things within the same directory or between different directories regardless of whether you are "in" any of those directories. Moving directories is just like moving files:
+It is important to understand that as long as you have specified a **source** and a **target** location when you are moving a file, then it doesn't matter what your current directory is. You can move or copy things within the same directory or between different directories regardless of whether you are "in" any of those directories. Moving directories is just like moving files:
 
 	$ mkdir Temp2 
 	$ ls 
-	Applications 	Code		Data	Documentation	Temp  Temp2 
+	Temp  Temp2 
 	$ mv Temp2 Temp/ 
 	$ ls Temp/
 	Temp2		earth.txt		heaven.txt	rags
@@ -429,23 +429,23 @@ It is important to understand that as long as you have specified a 'source' and 
 This step moves the Temp2 directory inside the Temp directory.
 
 #### Task U18.1 [U18.1]
-Create another Temp directory (Temp3) and then change directory to your home directory (~). **Without** changing directory, move the Temp3 directory to inside the /Volumes/USB/Unix_and_Perl_course/Temp directory.
+Create another Temp directory (Temp3) and then change directory to your home directory (~). **Without** changing directory, move the Temp3 directory to inside the /tmp/Work/Temp directory.
 
 ---
 
 ## U19: Here, there, and everywhere [U19]
 
-The philosophy of 'not having to be in a directory to do something in that directory', extends to just about any operation that you might want to do in Unix. Just because we need to do something with file X, it doesn't necessarily mean that we have to change directory to wherever file X is located. Let's assume that we just want to quickly check what is in the Data directory before continuing work with whatever we were previously doing in /Volumes/USB/Unix_and_Perl_course. Which of the following looks more convenient:
+The philosophy of _not having to be in a directory to do something in that directory_, extends to just about **any operation** that you might want to do in Unix. Just because we need to do something with file X, it doesn't necessarily mean that we have to change directory to wherever file X is located. Let's assume that we just want to quickly check what is in the Data directory before continuing work with whatever we were previously doing in /tmp/Work. Which of the following looks more convenient:
 
-	$ cd Data 
+	$ cd /tmp 
 	$ ls 
-	Arabidopsis		GenBank		Misc		Unix_test_files 
+	# some temp files
 	$ cd ..
 
 or...
 
-	$ ls Data/ 
-	Arabidopsis		GenBank		Misc		Unix_test_files
+	$ ls /tmp 
+	# some temp files
 
 In the first example, we change directories just to run the ls command, and then we change directories back to where we were again. The second example shows how we could have just stayed where we were.
 
@@ -474,12 +474,12 @@ You've seen how to remove a directory with the `rmdir` command, but `rmdir` won'
 
 >***Please read the next section VERY carefully. Misuse of the rm command can lead to needless death & destruction*** 
 
-Potentially, `rm` is a very dangerous command; if you delete something with `rm`, you will not get it back! It does not go into the trash or recycle can, it is permanently removed. It is possible to delete everything in your home directory (all directories and subdirectories) with `rm`, that is why it is such a dangerous command.
+Potentially, `rm` is a very dangerous command; if you delete something with `rm`, you will not get it back! It does **not** go into the trash or recycle can, it is permanently removed. It is possible to delete everything in your home directory (all directories and subdirectories) with `rm`, that is why it is such a dangerous command.
 
 Let me repeat that last part again. It is possible to delete EVERY file you have ever created with the `rm` command. Are you scared yet? You should be. Luckily there is a way of making `rm` a little bit safer. We can use it with the `-i` command-line option which will ask for confirmation before deleting anything:
 
 	$ pwd 
-	/Volumes/USB/Unix_and_Perl_course/Temp 
+	/tmp/Work
 	$ ls 
 	Temp2		Temp3		earth.txt	heaven.txt	rags 
 	$ rm -i earth.txt 
@@ -506,7 +506,7 @@ Copying files with the [cp][] (copy) command is very similar to moving them. Rem
 	file1	file2
 
 What if we wanted to copy files from a different directory to our current directory? Let's put a file in our home
-directory (specified by '~' remember) and copy it to the USB drive:
+directory (specified by '~' remember) and copy it to your current directory:
 
 	$ touch ~/file3 
 	$ ls 
@@ -514,7 +514,7 @@ directory (specified by '~' remember) and copy it to the USB drive:
 	$ cp ~/file3 . 
 	$ ls file1 file2 file3
 
-This last step introduces another new concept. In Unix, the current directory can be represented by a '.' (dot) character. You will mostly use this only for copying files to the current directory that you are in. But just to make a quick point, compare the following:
+This last step introduces another new concept. In Unix, the **current directory** can be represented by a '.' (dot) character. You will mostly use this only for copying files to the current directory that you are in. But just to make a quick point, compare the following:
 
 	$ ls 
 	$ ls . 
@@ -522,7 +522,7 @@ This last step introduces another new concept. In Unix, the current directory ca
 
 In this case, using the dot is somewhat pointless because `ls` will already list the contents of the current directory by default. Also note again how the trailing slash is optional.
 
-Let's try the opposite situation and copy these files back to the home directory (even though one of them is already there). The default behavior of copy is to overwrite (without warning) files that have the same name, so be careful.
+Let's try the opposite situation and copy these files back to the home directory (even though one of them is already there). The default behavior of copy is to **overwrite** (without warning) files that have the same name, so be careful.
 
 	$ cp file* ~/
 
@@ -547,7 +547,7 @@ The `cp` command also allows us (with the use of a command-line option) to copy 
 	file1	file2	file3
 
 #### Task U23.1 [U23.1]
-The `-R` option means 'copy recursively', many other Unix commands also have a similar option. See what happens if you don't include the `-R` option. We've finished with all of these temporary files now. Make sure you remove the Temp directory and its contents (remember to always use `rm -i`).
+The `-R` option means 'copy recursively', many other Unix commands also have a similar option. See what happens if you don't include the `-R` option. We've finished with all of these temporary files now. Make sure you remove the Temp directory and its contents (remember to use `rm -i` unless you really know what you are doing).
 
 [cp]: http://en.wikipedia.org/wiki/Cp_(Unix)
 
