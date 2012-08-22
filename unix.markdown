@@ -93,15 +93,15 @@ Unix keeps files arranged in a hierarchical structure. From the 'top-level' of t
 
 To see what files are in our home directory, we need to use the [ls][] command. This command 'lists' the contents of a directory. So why don't they call the command 'list' instead? Well, this is a good thing because typing long commands over and over again is tiring and time-consuming. There are many (frequently used) Unix commands that are just two or three letters. If we run the ls command we should see something like:
 
-	olson27-1:~ kbradnam$ ls 
+	gamma:~ jfv$ ls 
 	Application Shortcuts 	Documents	Library 
 	Desktop					Downloads 
-	olson27-1:~ kbradnam$
+	gamma:~ jfv$
 
 There are four things that you should note here:
 
 1. You will probably see different output to what is shown here, it depends on your computer. Don't worry about that for now. 
-2. The `olson27-1:~ kbradnam$` text that you see is the Unix [command prompt][]. It contains a user name (kbradnam), the name of the machine that this user is working on ('olson27-1' and the name of the current directory ('~' more on that later). Note that the command prompt might not look the same on different Unix systems. In this case, the $ sign marks the end of the prompt. 
+2. The `gamma:~ jfv$` text that you see is the Unix [command prompt][]. It contains a user name (jfv), the name of the machine that this user is working on ('gamma' and the name of the current directory ('~' more on that later). Note that the command prompt might not look the same on different Unix systems. In this case, the $ sign marks the end of the prompt. 
 3. The output of the `ls` command lists five things. In this case, they are all directories, but they could also be files. We'll learn how to tell them apart later on. 
 4. After the `ls` command finishes it produces a new command prompt, ready for you to type your next command.
 
@@ -127,12 +127,12 @@ It will help to think of this tree when we come to copying and moving files. E.g
 There may be many hundreds of directories on any Unix machine, so how do you know which one you are in? The command 
 [pwd][] will Print the [Working Directory][] and that's pretty much all this command does:
 
-	olson27-1:~ kbradnam$ pwd 
-	/users/clmuser
+	gamma:~ jfv$ pwd 
+	/Users/jfv
 
 When you log in to a Unix computer, you are typically placed into your _home_ directory. 
 
-In this example, after we log in, we are placed in a directory called 'clmuser' which itself is a subdirectory of another directory called 'users'. Conversely, 'users' is the parent directory of 'clmuser'. The first forward slash that appears in a list of directory names always refers to the top level directory of the file system (known as the [root directory][]). The remaining forward slash (between 'users' and 'clmuser') delimits the various parts of the directory hierarchy. If you ever get 'lost' in Unix, remember the `pwd` command.
+In this example, after we log in, we are placed in a directory called 'jfv' which itself is a subdirectory of another directory called 'users'. Conversely, 'users' is the parent directory of 'jfv'. The first forward slash that appears in a list of directory names always refers to the top level directory of the file system (known as the [root directory][]). The remaining forward slash (between 'users' and 'jfv') delimits the various parts of the directory hierarchy. If you ever get 'lost' in Unix, remember the `pwd` command.
 
 As you learn Unix you will frequently type commands that don't seem to work. Most of the time this will be because you are in the wrong directory, so it's a really good habit to get used to running the `pwd` command a lot.
 
@@ -147,10 +147,10 @@ As you learn Unix you will frequently type commands that don't seem to work. Mos
 We are in the home directory on the computer but we want to to work on the USB drive. To change directories in Unix, we
 use the [cd][] command:
 
-	olson27-1:~ kbradnam$ cd /Volumes/USB/Unix_and_Perl_course 
-	olson27-1:USB kbradnam$ ls
+	gamma:~ jfv$ cd /Volumes/USB/Unix_and_Perl_course 
+	gamma:USB jfv$ ls
 	Applications	Code		Data		Documentation 
-	olson27-1:USB kbradnam$ pwd 
+	gamma:USB jfv$ pwd 
 	/Volumes/USB/Unix_and_Perl_course
 
 The first command reads as "change directory to the test directory that is inside a directory called 'USB', which itself is inside the Volumes directory that is at the root level of the computer". 
@@ -428,7 +428,7 @@ It is important to understand that as long as you have specified a 'source' and 
 This step moves the Temp2 directory inside the Temp directory.
 
 #### Task U18.1 [U18.1]
-Create another Temp directory (Temp3) and then change directory to your home directory (/users/clmuser). **Without** changing directory, move the Temp3 directory to inside the /Volumes/USB/Unix_and_Perl_course/Temp directory.
+Create another Temp directory (Temp3) and then change directory to your home directory (~). **Without** changing directory, move the Temp3 directory to inside the /Volumes/USB/Unix_and_Perl_course/Temp directory.
 
 ---
 
