@@ -612,12 +612,22 @@ To get out of `genekc03`'s head and back to your local machine, you can type `ex
 
 ---
 
-## U26: Less is more [U26]
+## U26. A quick copy [U26]
+
+While we are connected to `genekc03`, let's copy over some files to your home directory (~) that we will need later.
+
+#### Task U26.1 [U26.1]
+
+There is a directory at `/n/core/Bioinformatics` called `Unix_Course` . *Copy* it and all of its contents to your home directory. Try to do it without moving into the `/n/core/Bioinformatics` directory at all.
+
+---
+
+## U27: Less is more [U27]
 
 So far we have covered listing the contents of directories and moving/copying/deleting either files and/or directories. Now we will quickly cover how you can look at files; in Unix the [less][less command] command lets you view (but not edit) text files. Let's take a look at a file of _Arabidopsis thaliana_ protein sequences:
 
 	$ ssh genekc03
-	$ cd /n/core/Bioinformatics/Unix_Course
+	$ cd ~/Unix_Course
 	$ less Data/Arabidopsis/At_proteins.fasta
 
 When you are using less, you can bring up a page of help commands by pressing `h`, scroll forward a page by pressing `space`, or go forward or backwards one line at a time by pressing `j` or `k`. To exit less, press `q` (for quit). The `less` program also does about a million other useful things (including text searching).
@@ -626,7 +636,7 @@ When you are using less, you can bring up a page of help commands by pressing `h
 
 ---
 
-## U27: Fire the editor [U27]
+## U28: Fire the editor [U28]
 
 We've moved, touched, copied, and looked at files so far. Now lets try editing one.
 
@@ -640,7 +650,7 @@ You should see the following appear in your terminal:
 
 The bottom of the nano window shows you a list of simple commands which are all accessible by typing 'Control' plus a letter. E.g. Control + X exits the program.
 
-#### Task U27.1 [U27.1]
+#### Task U28.1 [U28.1]
 
 Type some text in the editor and then save it (Control + O). Nano will ask if you want to 'save the modified buffer' and then ask if you want to keep the same name. Then exit nano (Control + X) and use `less` to confirm that the profile file contains the text you added.
 
@@ -648,13 +658,13 @@ Type some text in the editor and then save it (Control + O). Nano will ask if yo
 
 ---
 
-## U28: Sticking to the script [U28]
+## U29: Sticking to the script [U29]
 
 Unix can also be used as a programming language just to let you create your own 'programs' which are really just text files with commands in them.
 
 So how do you make a Unix script (which are commonly called 'shell scripts')? At the simplest level, we just write one or more  Unix commands to a file and then treat that file as if it was any other Unix command or program.
 
-#### Task U28.1 [U28.1]
+#### Task U29.1 [U29.1]
 
 Copy the following two lines to a file (using `nano`). Name that file hello.sh (shell scripts are typically given a .sh extension).
 
@@ -674,17 +684,17 @@ When you have done that, simply type 'hello.sh' and see what happens. If it work
 
 ---
 
-## U29: Ask for permission [U29]
+## U30: Ask for permission [U30]
 
 The chmod command can also modify read and write permissions for files, and change any of the three sets of permissions (read, write, execute) at the level of 'user', 'group', and 'other'. You probably won't need to know any more about the chmod command other than you need to use it to make scripts executable.
 
 ---
 
-## U30: The power of shell scripts [U30]
+## U31: The power of shell scripts [U31]
 
 Time to make some Unix shell scripts that might actually be useful.
 
-#### Task U30.1 [U30.1]
+#### Task U31.1 [U31.1]
 Look in the Data/Unix_test_files directory. You should see several files (all are empty) and four directories. Now put the following information into a shell script (using `nano`) and save it as cleanup.sh.
 
 	#!/bin/bash
@@ -697,7 +707,7 @@ Make sure you are in the right directory and then run this script. It should pla
 
 Did you notice the #!/bin/bash line in this script? There are several different types of shell script in Unix, and this line makes it clearer that a) that this is actually a file that can be treated as a program and b) that it will be a bash script (bash is a type of Unix). As a general rule, all type of scriptable programming languages should have a similar line as the first line in the program.
 
-#### Task U30.2 [U30.2]
+#### Task U31.2 [U31.2]
 
 Here is another script. Copy this information into a file called change_file_extension.sh and again place that file in the Code directory.
 
@@ -728,6 +738,13 @@ Hopefully you can see how a relatively simple Unix shell script can be potential
 ## How to Become a Unix power user
 
 The commands that you have learnt so far are essential for doing any work in Unix but they don't really let you do anything that is very useful. The following sections will introduce a few new commands that will start to show you how powerful Unix is.
+
+## U32: Get back to genekc03 [U32]
+
+First lets get back to `genekc03` and into our `Unix_Course` directory.
+
+	$ ssh genekc03
+	$ cd ~/Unix_Course
 
 ---
 
