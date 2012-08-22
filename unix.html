@@ -699,10 +699,10 @@ echo &quot;Hello World&quot;
 
 <p>Programs in Unix need permission to be run. We will normally always have to type the following for any script that we create:</p>
 
-<pre><code>$ chmod u+x hello.sh
+<pre><code>$ chmod +x hello.sh
 </code></pre>
 
-<p>This would use the <a href="http://en.wikipedia.org/wiki/Chmod">chmod</a> to add <em>executable</em> permissions (+x) to the file called &#8216;hello.sh&#8217; (the &#8216;u&#8217; means add this permission to just you, the user). Without it, your script won&#8217;t run.</p>
+<p>This would use the <a href="http://en.wikipedia.org/wiki/Chmod">chmod</a> to add <em>executable</em> permissions (+x) to the file called &#8216;hello.sh&#8217;. Without it, your script won&#8217;t run.</p>
 
 <p>When you have done that, simply type &#8216;hello.sh&#8217; and see what happens. If it worked, then it should have printed &#8216;Hello world&#8217;. This very simple script uses the Unix command <a href="http://en.wikipedia.org/wiki/Echo_(command)">echo</a> which just prints output to the screen. Also note the comment that precedes the <code>echo</code> command which starts with the <code>#</code>. Comments are useful to people reading the script, and they are completely ignored when running the program.</p>
 

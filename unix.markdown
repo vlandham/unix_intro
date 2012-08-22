@@ -663,9 +663,9 @@ Copy the following two lines to a file (using `nano`). Name that file hello.sh (
 
 Programs in Unix need permission to be run. We will normally always have to type the following for any script that we create:
 
-	$ chmod u+x hello.sh
+	$ chmod +x hello.sh
 
-This would use the [chmod][] to add _executable_ permissions (+x) to the file called 'hello.sh' (the 'u' means add this permission to just you, the user). Without it, your script won't run.
+This would use the [chmod][] to add _executable_ permissions (+x) to the file called 'hello.sh'. Without it, your script won't run.
 
 When you have done that, simply type 'hello.sh' and see what happens. If it worked, then it should have printed 'Hello world'. This very simple script uses the Unix command [echo][] which just prints output to the screen. Also note the comment that precedes the `echo` command which starts with the `#`. Comments are useful to people reading the script, and they are completely ignored when running the program.
 
