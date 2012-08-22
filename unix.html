@@ -84,10 +84,10 @@ example:</p>
 <p>Before we go any further, you should note that you can:</p>
 
 <ul>
-<li>make the text larger/smaller (hold down &#8216;command&#8217; and either &#8216;+&#8217; or &#8216;-&#8217;)</li>
-<li>resize the window (this will often be necessary)</li>
-<li>have multiple terminal windows on screen (see the &#8216;Shell&#8217; menu)</li>
-<li>have multiple tabs open within each window (again see the &#8216;Shell&#8217; menu)</li>
+<li>make the text <strong>larger/smaller</strong> (hold down &#8216;command&#8217; (&#x2318;) and either &#8216;+&#8217; or &#8216;-&#8217;)</li>
+<li><strong>resize</strong> the window (this will often be necessary)</li>
+<li>have <strong>multiple terminal windows</strong> on screen (see the <em>Shell</em> menu)</li>
+<li>have <strong>multiple tabs</strong> open within each window (again see the <em>Shell</em> menu)</li>
 </ul>
 
 <p>There will be many situations where it will be useful to have multiple terminals open and it will be a matter of
@@ -98,32 +98,34 @@ shortcuts for switching between windows, or moving between tabs).</p>
 
 <h2 id="u2">U2. Your first Unix command</h2>
 
-<p>Unix keeps files arranged in a hierarchical structure. From the &#8216;top-level&#8217; of the computer, there will be a number of directories, each of which can contain files and subdirectories, and each of those in turn can of course contain more files and directories and so on, ad infinitum. It&#8217;s important to note that you will always be &#8220;in&#8221; a directory when using the terminal. The default behavior is that when you open a new terminal you start in your own &#8217;home&quot; directory (containing files and directories that only you can modify).</p>
+<p>Unix keeps files arranged in a hierarchical structure. From the &#8216;top-level&#8217; of the computer, there will be a number of directories, each of which can contain files and subdirectories, and each of those in turn can of course contain more files and directories and so on, ad infinitum. It&#8217;s important to note that you will always be &#8220;in&#8221; a directory when using the terminal. The default behavior is that when you open a new terminal you start in your own &#8216;<em>home</em>&#8217; directory (on a Mac, this is the directory your <em>Music</em>, <em>Pictures</em>, and <em>Desktop</em> directory reside in).</p>
 
 <p>To see what files are in our home directory, we need to use the <a href="http://en.wikipedia.org/wiki/Ls">ls</a> command. This command &#8216;lists&#8217; the contents of a directory. So why don&#8217;t they call the command &#8216;list&#8217; instead? Well, this is a good thing because typing long commands over and over again is tiring and time-consuming. There are many (frequently used) Unix commands that are just two or three letters. If we run the ls command we should see something like:</p>
 
-<pre><code>olson27-1:~ kbradnam$ ls 
+<pre><code>gamma:~ jfv$ ls 
 Application Shortcuts   Documents   Library 
 Desktop                 Downloads 
-olson27-1:~ kbradnam$
+gamma:~ jfv$
 </code></pre>
 
 <p>There are four things that you should note here:</p>
 
 <ol>
-<li>You will probably see different output to what is shown here, it depends on your computer. Don&#8217;t worry about that for now.</li>
-<li>The <code>olson27-1:~ kbradnam$</code> text that you see is the Unix <a href="http://en.wikipedia.org/wiki/Command_line_interface">command prompt</a>. It contains a user name (kbradnam), the name of the machine that this user is working on (&#8216;olson27&#8211;1&#8217; and the name of the current directory (&#8216;~&#8217; more on that later). Note that the command prompt might not look the same on different Unix systems. In this case, the $ sign marks the end of the prompt.</li>
-<li>The output of the <code>ls</code> command lists five things. In this case, they are all directories, but they could also be files. We&#8217;ll learn how to tell them apart later on.</li>
-<li>After the <code>ls</code> command finishes it produces a new command prompt, ready for you to type your next command.</li>
+<li>You will probably see a slightly <em>different</em> output to what is shown here, it depends on your computer. Don&#8217;t worry about that for now.</li>
+<li>The <code>gamma:~ jfv$</code> text that you see is the Unix <a href="http://en.wikipedia.org/wiki/Command_line_interface">command prompt</a>. The command prompt is where we will be typing Unix commands. It is usually also configured to provide some useful information to the user. Here, it contains a user name (for me: <em>jfv</em>), the name of the machine that this user is working on (for me <em>gamma</em>), and the name of the current directory (&#8216;~&#8217; more on that later). Note that the command prompt might not look the same on different Unix systems. In this case, the $ sign marks the end of the prompt.</li>
+<li>The output of the <code>ls</code> command lists a number of things. In this case, they are all directories, but they could also be files. We&#8217;ll learn how to tell them apart later on.</li>
+<li>After the <code>ls</code> command finishes it produces a <strong>new command prompt</strong>, ready for you to type your next command.</li>
 </ol>
 
 <hr />
 
 <h2 id="u3">U3: The Unix tree</h2>
 
-<p>Looking at directories from within a Unix terminal can often seem confusing. But bear in mind that these directories are exactly the same type of folders that you can see if you use Apple&#8217;s graphical file-management program (known as &#8216;The Finder&#8217;). A tree analogy is often used when describing computer filesystems. From the root level (/) there can be one or more top level directories, though most Macs will have about a dozen. In the example below, we show just three. When you log in to a computer you are working with your files in your home directory, and this will nearly always be inside a &#8216;Users&#8217; directory. On many computers there will be multiple users.</p>
+<p>Looking at directories from within a Unix terminal can often seem confusing. But bear in mind that these directories are exactly the same type of folders that you can see if you use Apple&#8217;s graphical file-management program (known as <strong>The Finder</strong>). A tree analogy is often used when describing computer filesystems. From the root level (/) there can be one or more top level directories, though most Macs will have about a dozen. In the example below, we show just three. When you log in to a computer you are working with your files in your home directory, and this will nearly always be inside a &#8216;Users&#8217; directory. On many computers there will be multiple users.</p>
 
 <p>All Macs have an applications directory where all the GUI (graphical user interface) programs are kept (e.g. iTunes, Microsoft Word, Terminal). Another directory that will be on all Macs is the Volumes directory. In addition to any attached <em>external</em> drives, the Volumes directory should also contain directories for every <em>internal</em> hard drive (of which there should be at least one, in this case it&#8217;s simply called &#8216;Mac&#8217;). </p>
+
+<p>On other Unix systems, for instance a Linux distribution like <a href="http://www.ubuntu.com/">Ubuntu</a>, the names and contents of the directories will be different. However, the structure and navigation of the Unix tree will be exactly the same. Once you know how to get around in one Unix system, you can get around in all of them.</p>
 
 <p>It will help to think of this tree when we come to copying and moving files. E.g. if we had a file in the &#8216;Code&#8217; directory and wanted to copy it to the &#8216;keith&#8217; directory, we would have to go <em>up</em> four levels to the root level, and then <em>down</em> two levels.</p>
 
@@ -137,16 +139,16 @@ olson27-1:~ kbradnam$
 
 <h2 id="u4">U4: Finding out where you are</h2>
 
-<p>There may be many hundreds of directories on any Unix machine, so how do you know which one you are in? The command
-<a href="http://en.wikipedia.org/wiki/Pwd">pwd</a> will Print the <a href="http://en.wikipedia.org/wiki/Working_directory">Working Directory</a> and that&#8217;s pretty much all this command does:</p>
+<p>There may be many hundreds or thousands of directories on any Unix machine, so how do you know which one you are in? The command
+<a href="http://en.wikipedia.org/wiki/Pwd">pwd</a> will Print the <a href="http://en.wikipedia.org/wiki/Working_directory">Working Directory</a> - the directory you are currently in. That&#8217;s pretty much all this command does:</p>
 
-<pre><code>olson27-1:~ kbradnam$ pwd 
-/users/clmuser
+<pre><code>gamma:~ jfv$ pwd 
+/Users/jfv
 </code></pre>
 
 <p>When you log in to a Unix computer, you are typically placed into your <em>home</em> directory. </p>
 
-<p>In this example, after we log in, we are placed in a directory called &#8216;clmuser&#8217; which itself is a subdirectory of another directory called &#8216;users&#8217;. Conversely, &#8216;users&#8217; is the parent directory of &#8216;clmuser&#8217;. The first forward slash that appears in a list of directory names always refers to the top level directory of the file system (known as the <a href="http://en.wikipedia.org/wiki/Root_directory">root directory</a>). The remaining forward slash (between &#8216;users&#8217; and &#8216;clmuser&#8217;) delimits the various parts of the directory hierarchy. If you ever get &#8216;lost&#8217; in Unix, remember the <code>pwd</code> command.</p>
+<p>In this example, after we log in, we are placed in a directory called &#8216;jfv&#8217; which itself is a subdirectory of another directory called &#8216;Users&#8217;. Conversely, &#8216;Users&#8217; is the parent directory of &#8216;jfv&#8217;. The first forward slash that appears in a list of directory names always refers to the top level directory of the file system (known as the <a href="http://en.wikipedia.org/wiki/Root_directory">root directory</a>). The remaining forward slash (between &#8216;users&#8217; and &#8216;jfv&#8217;) delimits the various parts of the directory hierarchy. If you ever get &#8216;lost&#8217; in Unix, remember the <code>pwd</code> command.</p>
 
 <p>As you learn Unix you will frequently type commands that don&#8217;t seem to work. Most of the time this will be because you are in the wrong directory, so it&#8217;s a really good habit to get used to running the <code>pwd</code> command a lot.</p>
 
@@ -157,70 +159,69 @@ olson27-1:~ kbradnam$
 <p>We are in the home directory on the computer but we want to to work on the USB drive. To change directories in Unix, we
 use the <a href="http://en.wikipedia.org/wiki/Cd_(command)">cd</a> command:</p>
 
-<pre><code>olson27-1:~ kbradnam$ cd /Volumes/USB/Unix_and_Perl_course 
-olson27-1:USB kbradnam$ ls
-Applications    Code        Data        Documentation 
-olson27-1:USB kbradnam$ pwd 
-/Volumes/USB/Unix_and_Perl_course
+<pre><code>gamma:~ jfv$ cd /Users/Shared
+gamma:/Users/Shared jfv$ ls
+# ... some set of files
+gamma:/Users/Shared jfv$ pwd 
+/Users/Shared
 </code></pre>
 
-<p>The first command reads as &#8220;change directory to the test directory that is inside a directory called &#8216;USB&#8217;, which itself is inside the Volumes directory that is at the root level of the computer&#8221;. </p>
+<p>The first command reads as &#8220;change directory to the <code>Shared</code> directory which inside the <code>Users</code> directory which is in turn at the root level of the File System&#8221;.</p>
 
 <hr />
 
-<h2 id="u6">U6: Root is the root of (some) evil</h2>
+<h2 id="u6">U6: Root is the root of (potential) evil</h2>
 
 <p>In the previous example, we could have achieved the same result in three separate steps:</p>
 
-<pre><code>$ cd /Volumes 
-$ cd USB 
-$ cd Unix_and_Perl_course
+<pre><code>$ cd /Users 
+$ cd Shared 
 </code></pre>
 
-<p>Note that the second and third commands do not include a forward slash. When you specify a directory that starts with a forward slash, you are referring to a directory that should exist one level below the root level of the computer. What happens if you try the following two commands? The first command should produce an error message.</p>
+<p>Note that the second command <strong>does not include a forward slash</strong>. When you specify a directory that starts with a forward slash, you are referring to a directory that should exist one level below the root level of the computer. The forward slash means <em>the root</em>. What happens if you try the following two commands? The first command should produce an error message.</p>
 
 <pre><code>$ cd Volumes 
 $ cd /Volumes
 </code></pre>
 
-<p>The error is because without including a leading slash, Unix is trying to change to a &#8216;Volumes&#8217; directory below your current level in the file hierarchy (/Volumes/USB/Unix_and_Perl_course), and there is no directory called Volumes at this location.</p>
+<p>The error is because without including a leading slash, Unix is trying to change to a &#8216;Volumes&#8217; directory <em>below your current level</em> in the file hierarchy (/Users/Shared), and there is no directory called <code>Volumes</code> at this location.</p>
 
 <hr />
 
 <h2 id="u7">U7: Up, up, and away</h2>
 
-<p>Frequently, you will find that you want to go &#8216;upwards&#8217; one level in the directory hierarchy. Two dots <code>..</code> are used in Unix to refer to the <em>parent</em> directory of wherever you are. Every directory has a parent except the root level of the computer:</p>
+<p>Frequently, you will find that you want to go &#8216;upwards&#8217; one level in the directory hierarchy, i.e. one directory <strong>closer to the root</strong>. Two dots <code>..</code> are used in Unix to refer to the <em>parent</em> directory of wherever you are. Every directory has a parent except the root level of the computer:</p>
 
-<pre><code>$ cd /Volumes/USB/Unix_and_Perl_course 
+<pre><code>$ cd /Users/Shared
 $ pwd 
-/Volumes/USB/Unix_and_Perl_course 
+/Users/Shared
 $ cd .. 
 $ pwd 
-/Volumes/USB
+/Users
 </code></pre>
 
 <p>What if you wanted to navigate up <em>two</em> levels in the file system in one go? It&#8217;s very simple, just use two sets of the <code>..</code> operator, separated by a forward slash:</p>
 
-<pre><code>$ cd /Volumes/USB/Unix_and_Perl_course 
+<pre><code>$ cd /Users/Shared
 $ pwd 
-/Volumes/USB/Unix_and_Perl_course 
+/Users/Shared
 $ cd ../.. 
 $ pwd 
-/Volumes 
+/
 </code></pre>
 
 <hr />
 
 <h2 id="u8">U8: I&#8217;m absolutely sure that this is all relative</h2>
 
-<p>Using <code>cd ..</code> allows us to change directory <em>relative</em> to where we are now. You can also always change to a directory based on its <em>absolute</em> location. E.g. if you are working in the <code>/Volumes/USB/Unix_and_Perl_course/Code</code> directory and you then want to change to the <code>/Volumes/USB/Unix_and_Perl_course/Data</code> directory, then you could do either of the following:</p>
+<p>Using <code>cd ..</code> allows us to change directory <em>relative</em> to where we are now. You can also always change to a directory based on its <em>absolute</em> location. E.g. if you are working in the <code>/Users/Shared/Code</code> directory and you then want to change to the <code>/Users/Shared/Data</code> directory, then you could do either of the following:</p>
 
 <pre><code>$ cd ../Data
 </code></pre>
 
 <p>or&#8230;</p>
 
-<pre><code>$ cd /Volumes/USB/Unix_and_Perl_course/Data
+<pre><code>$ cd /Users/Shared/Data
 </code></pre>
 
 <p>They both achieve the same thing, but the 2nd example requires that you know about the full <em>path</em> from the root level of the computer to your directory of interest (the &#8216;path&#8217; is an important concept in Unix). Sometimes it is quicker to change directories using the relative path, and other times it will be quicker to use the absolute path.</p>
@@ -245,7 +246,7 @@ $ cd
 
 <hr />
 
-<h2 id="u10">U10: Making the <code>ls</code> command more useful</h2>
+<h2 id="u10">U10: Making the ls command more useful</h2>
 
 <p>The <code>..</code> operator that we saw earlier can also be used with the <code>ls</code> command. Can you see how the following command is listing the contents of the root directory? If you want to test this, try running <code>ls /</code> and see if the output is any different.</p>
 
@@ -261,14 +262,15 @@ System          mach_kernel var
 Users           mach_kernel.ctfsys
 </code></pre>
 
-<p>The <code>ls</code> command (like most Unix commands) has a set of options that can be added to the command to change the results. Command-line options in Unix are specified by using a dash (&#8216;-&#8217;) after the command name followed by various letters, numbers, or words. If you add the letter &#8216;l&#8217; to the <code>ls</code> command it will give you a &#8216;longer&#8217; output compared to the default:</p>
+<p>The <code>ls</code> command (like most Unix commands) has a <strong>set of options</strong> that can be added to the command to change the results. Command-line options in Unix are specified by using a dash (&#8216;-&#8217;) after the command name followed by various letters, numbers, or words. Sometimes these command line options are called <strong>flags</strong>. If you add the flag <code>-l</code> to the <code>ls</code> command it will give you a <em>longer</em> output compared to the default:</p>
 
-<pre><code>$ ls -l /Volumes/USB/Unix_and_Perl_course 
-total 192 
-drwxrwxrwx  1 keith  staff  16384 Oct  3 09:03 Applications
-drwxrwxrwx  1 keith  staff  16384 Oct  3 11:11 Code 
-drwxrwxrwx  1 keith  staff  16384 Oct  3 11:12 Data 
-drwxrwxrwx  1 keith  staff  16384 Oct  3 11:34 Documentation
+<pre><code>$ ls -l ~
+total 184
+drwx------+ 41 jfv   SIMR01\Domain Users   1394 Aug 22 09:00 Desktop
+drwx------+ 49 jfv   SIMR01\Domain Users   1666 Aug 13 16:00 Documents
+drwx------+ 97 jfv   SIMR01\Domain Users   3298 Aug 22 09:04 Downloads
+drwx------@ 23 jfv   SIMR01\Domain Users    782 Aug 15 12:06 Dropbox
+# ... many more
 </code></pre>
 
 <p>For each file or directory we now see more information (including file ownership and modification times). The &#8216;d&#8217; at the start of each line indicates that these are directories</p>
@@ -297,27 +299,27 @@ $ man cd
 $ man man # yes even the man command has a manual page
 </code></pre>
 
-<p>When you are using the man command, press <code>space</code> to scroll down a page, <code>b</code> to go back a page, or <code>q</code> to quit. You can also use the up and down arrows to scroll a line at a time. The man command is actually using another Unix program, a text viewer called <code>less</code>, which we&#8217;ll come to later on.</p>
+<p>When you are using the man command, press <code>space</code> to scroll down a page, <code>b</code> to go back a page, or <code>q</code> to quit. You can also use the <strong>up and down arrows</strong> to scroll a line at a time. The man command is actually using another Unix program, a text viewer called <code>less</code>, which we&#8217;ll come to later on.</p>
 
 <p>Some Unix commands have very long manual pages, which might seem very confusing. It is typical though to always list the command line options early on in the documentation, so you shouldn&#8217;t have to read too much in order to find out what a command-line option is doing.</p>
 
 <hr />
 
-<h2 id="u12">U12: Make directories, not war</h2>
+<h2 id="u12">U12: Making new directories</h2>
 
 <p>If we want to make a new directory (e.g. to store some work related data), we can use the
 <a href="http://en.wikipedia.org/wiki/Tilde#Directories_and_URLs">mkdir</a> command:</p>
 
-<pre><code>$ cd /Volumes/USB/Unix_and_Perl_course 
+<pre><code>$ cd /tmp
 $ mkdir Work
 $ ls
-Applications    Code        Data        Documentation   Work 
+# should see 'Work' in the list
 $ mkdir Temp1 
 $ cd Temp1 
 $ mkdir Temp2 
 $ cd Temp2 
 $ pwd 
-/Volumes/USB/Unix_and_Perl_course/Temp1/Temp2
+/tmp/Temp1/Temp2
 </code></pre>
 
 <p>In the last example we created the two temp directories in two separate steps. If we had used the <code>-p</code> option of the <code>mkdir</code> command we could have done this in one step. E.g.</p>
@@ -334,47 +336,45 @@ directories using both the <em>absolute</em> as well as the <em>relative</em> pa
 
 <h2 id="u13">U13: Time to tidy up</h2>
 
-<p>We now have a few (empty) directories that we should remove. To do this use the <a href="http://en.wikipedia.org/wiki/Rmdir">rmdir</a> command, this will only remove empty directories so it is quite safe to use. If you want to know more about this command (or any Unix command), then remember that you can just look at its man page.</p>
+<p>We now have a few (empty) directories that we should remove. To do this use the <a href="http://en.wikipedia.org/wiki/Rmdir">rmdir</a> command, this will <em>only remove empty directories</em> so it is quite safe to use. If you want to know more about this command (or any Unix command), then remember that you can just look at its man page.</p>
 
-<pre><code>$ cd /Volumes/USB/Unix_and_Perl_course 
+<pre><code>$ cd /tmp
 $ rmdir Work
 </code></pre>
 
 <h4 id="u13.1">Task U13.1</h4>
 
-<p>Remove the remaining empty Temp directories that you have created</p>
+<p>Remove the remaining empty Temp directories that you have created. First try to remove <code>Temp1</code> first, see that you get an error message about the directory not being empty.</p>
 
 <hr />
 
 <h2 id="u14">U14: The art of typing less to do more</h2>
 
-<p>Saving keystrokes may not seem important, but the longer that you spend typing in a terminal window, the happier you
-will be if you can reduce the time you spend at the keyboard. Especially, as prolonged typing is not good for your body.
-So the best Unix tip to learn early on is that you can <a href="http://en.wikipedia.org/wiki/Command_line_completion">tab complete</a> the names of files and programs on most Unix
-systems. Type enough letters that uniquely identify the name of a file, directory or program and press tab&#8230;Unix will
-do the rest. E.g. if you type &#8216;tou&#8217; and then press tab, Unix will autocomplete the word to touch (which we will learn
-more about in a minute). In this case, tab completion will occur because there are no other Unix commands that start
-with &#8216;tou&#8217;. If pressing tab doesn&#8217;t do anything, then you have not have typed enough unique characters. In this case
-pressing tab <em>twice</em> will show you all possible completions. This trick can save you a LOT of typing&#8230;if you don&#8217;t use
-tab-completion then you must be a masochist.</p>
+<p>Saving keystrokes may not seem important, but the longer that you spend typing in a terminal window, the happier you will be if you can reduce the time you spend repeating the same or similar commands.</p>
+
+<p>So the best Unix tip to learn early on is that you can <a href="http://en.wikipedia.org/wiki/Command_line_completion">tab complete</a> the names of files and programs on most Unix systems. Type enough letters that uniquely identify the name of a file, directory or program and press tab&#8230;Unix will do the rest. </p>
+
+<p>For example, if you type &#8216;tou&#8217; and then press tab, Unix will <strong>autocomplete</strong> the word to <code>touch</code> (which we will learn more about in a minute). In this case, tab completion will occur because there are no other Unix commands that start with &#8216;tou&#8217;. If pressing tab doesn&#8217;t do anything, then you have not have typed enough unique characters. In this case <strong>pressing tab twice</strong> will show you all possible completions. This trick can save you a LOT of typing.</p>
 
 <h4 id="u14.1">Task U14.1</h4>
 
-<p>Navigate to your home directory, and then use the <code>cd</code> command to change to the <code>/Volumes/USB/Unix_and_Perl_course/Code/ directory</code>. Use tab completion for each directory name. This should only take 13 key strokes compared to 41 if you type the whole thing yourself.</p>
+<p>Navigate to your home directory, and then use the <code>cd</code> command to change to the <code>/Users/Shared</code> directory. Use tab completion for each directory name. This should take significantly fewer keystrokes then typing it out all manually.</p>
 
-<p>Another great time-saver is that Unix stores a list of all the commands that you have typed in each login session. You can access this list by using the <a href="http://en.wikipedia.org/wiki/History_(Unix)">history</a> command or more simply by using the up and down arrows to access anything from your history. So if you type a long command but make a mistake, press the up arrow and then you can use the left and right arrows to move the cursor in order to make a change.</p>
+<p>Another great time-saver is that Unix stores a list of all the commands that you have typed in each login session. You can access this list by using the <a href="http://en.wikipedia.org/wiki/History_(Unix)">history</a> command or more simply by using the <strong>up and down arrows</strong> to access anything from your history. So if you type a long command but make a mistake, press the up arrow and then you can use the left and right arrows to move the cursor in order to make a change.</p>
 
 <hr />
 
-<h2 id="u15">U15: U <em>can</em> touch this</h2>
+<h2 id="u15">U15: U <em>can</em> touch this</h2>
 
 <p>The following sections will deal with Unix commands that help us to work with files, i.e. copy files to/from places, move files, rename files, remove files, and most importantly, look at files. Remember, we want to be able to do all of these things without leaving the terminal. First, we need to have some files to play with. The Unix command <a href="http://en.wikipedia.org/wiki/Command_line_completion">touch</a> will let us create a new, empty file. The touch command does other things too, but for now we just want a couple of files to work with.</p>
 
-<pre><code>$ cd /Volumes/USB/Unix_and_Perl_course 
+<pre><code>$ cd /tmp/
+$ mkdir Work
+$ cd Work
 $ touch heaven.txt 
 $ touch earth.txt 
-$ ls Applications
-Code    Data    Documentation   earth.txt     heaven.txt
+$ ls
+earth.txt     heaven.txt
 </code></pre>
 
 <hr />
@@ -387,7 +387,7 @@ Code    Data    Documentation   earth.txt     heaven.txt
 $ mv heaven.txt Temp/ 
 $ mv earth.txt Temp/ 
 $ ls 
-Applications   Code     Data    Documentation   Temp 
+Temp 
 $ ls Temp/
 earth.txt heaven.txt
 </code></pre>
@@ -451,7 +451,7 @@ Temp2       earth.txt       heaven.txt  rags
 
 <h4 id="u18.1">Task U18.1</h4>
 
-<p>Create another Temp directory (Temp3) and then change directory to your home directory (/users/clmuser). <strong>Without</strong> changing directory, move the Temp3 directory to inside the /Volumes/USB/Unix_and_Perl_course/Temp directory.</p>
+<p>Create another Temp directory (Temp3) and then change directory to your home directory (~). <strong>Without</strong> changing directory, move the Temp3 directory to inside the /Volumes/USB/Unix_and_Perl_course/Temp directory.</p>
 
 <hr />
 
