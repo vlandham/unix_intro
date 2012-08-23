@@ -2,7 +2,7 @@
 
 <h1 id="unixprimerforbiologists">Unix Primer for Biologists</h1>
 
-<h2 id="adaptedforstowers">Adapted for Stowers</h2>
+<h2 id="adaptedforstowersinstitute">Adapted for Stowers Institute</h2>
 
 <hr />
 
@@ -13,6 +13,8 @@
 <li><a href="#part1">Part 1</a> &#8212; Unix - Learning the essentials</li>
 <li><a href="#part2">Part 2</a> &#8212; Advanced Unix</li>
 </ul>
+
+<p><br/></p>
 
 <hr />
 
@@ -250,8 +252,8 @@ $ cd
 
 <p>The <code>..</code> operator that we saw earlier can also be used with the <code>ls</code> command. Can you see how the following command is listing the contents of the root directory? If you want to test this, try running <code>ls /</code> and see if the output is any different.</p>
 
-<pre><code>$ cd /Volumes/USB/Unix_and_Perl_course 
-$ ls ../../.. 
+<pre><code>$ cd /Users/Shared
+$ ls ../.. 
 Applications    Volumes     net
 CRC             bin         oldlogins 
 Developer       cores       private
@@ -497,7 +499,7 @@ $ ls Documentation/
 
 <h2 id="u21">U21: The most dangerous Unix command you will ever learn!</h2>
 
-<p>You&#8217;ve seen how to remove a directory with the <code>rmdir</code> command, but <code>rmdir</code> won&#8217;t remove directories if they contain any files. So how can we remove the files we have created (in /Volumes/USB/Unix_and_Perl_course/Temp)? In order to do this, we will have to use the <a href="http://en.wikipedia.org/wiki/Rm_(Unix)">rm</a> (remove) command.</p>
+<p>You&#8217;ve seen how to remove a directory with the <code>rmdir</code> command, but <code>rmdir</code> won&#8217;t remove directories if they contain any files. So how can we remove the files we have created (just the temporary ones for this tutorial )? In order to do this, we will have to use the <a href="http://en.wikipedia.org/wiki/Rm_(Unix)">rm</a> (remove) command.</p>
 
 <blockquote>
 <p><strong><em>Please read the next section VERY carefully. Misuse of the rm command can lead to needless death &amp; destruction</em></strong> </p>
@@ -651,7 +653,7 @@ Connection to genekc03 closed.
 
 <h4 id="u26.1">Task U26.1</h4>
 
-<p>There is a directory at <code>/n/core/Bioinformatics</code> called <code>Unix_Course</code> . <em>Copy</em> it and all of its contents to your home directory. Try to do it without moving into the <code>/n/core/Bioinformatics</code> directory at all.</p>
+<p>There is a directory at <code>/n/core/Bioinformatics</code> called <code>unix_intro</code> . <em>Copy</em> it and all of its contents to your home directory. Try to do it without moving into the <code>/n/core/Bioinformatics</code> directory at all.</p>
 
 <hr />
 
@@ -660,7 +662,7 @@ Connection to genekc03 closed.
 <p>So far we have covered listing the contents of directories and moving/copying/deleting either files and/or directories. Now we will quickly cover how you can look at files; in Unix the <a href="http://en.wikipedia.org/wiki/Less_(Unix)">less</a> command lets you view (but not edit) text files. Let&#8217;s take a look at a file of <em>Arabidopsis thaliana</em> protein sequences:</p>
 
 <pre><code>$ ssh genekc03
-$ cd ~/Unix_Course
+$ cd ~/unix_intro
 $ less Data/Arabidopsis/At_proteins.fasta
 </code></pre>
 
@@ -778,10 +780,10 @@ done
 
 <h2 id="u32">U32: Get back to genekc03</h2>
 
-<p>First lets get back to <code>genekc03</code> and into our <code>Unix_Course</code> directory.</p>
+<p>First lets get back to <code>genekc03</code> and into our <code>unix_intro</code> directory.</p>
 
 <pre><code>$ ssh genekc03
-$ cd ~/Unix_Course
+$ cd ~/unix_intro
 </code></pre>
 
 <hr />
@@ -823,7 +825,7 @@ TTTTTTGTGAATGTGGTTGAGTAGAATTTAGGGCTTTGGATTAAATGTGACAAGATTTTG
 
 <p>By now, you might be getting a bit fed up of waiting for the <code>grep</code> command to finish, or you might want a cleaner way of controlling things without having to reach for Ctrl-C. Ideally, you might want to look at the output from any command in a controlled manner, i.e. you might want to use a Unix program like less to view the output.</p>
 
-<p>This is very easy to do in Unix, you can send the output from any command to any other Unix program (as long as the second program accepts input of some sort). We do this by using what is known as a <a href="http://en.wikipedia.org/wiki/Pipe_(Unix)">pipe</a>. This is implemented using the &#8216;|&#8217; character (which is a character which always seems to be on different keys depending on the keyboard that you are using). Think of the pipe as simply connecting two Unix programs. In this next example we send the output from <code>grep</code> down a pipe to the less program. Let&#8217;s imagine that we just want to see lines in the input file which contain the pattern &#8220;ATGTGA&#8221; (a potential start and stop codon combined):</p>
+<p>This is very easy to do in Unix, you can send the output from any command to any other Unix program (as long as the second program accepts input of some sort). We do this by using what is known as a <a href="http://en.wikipedia.org/wiki/Pipe_(Unix)">pipe</a>. This is implemented using the &#8216;|&#8217; character (which is a character which always seems to be on different keys depending on the keyboard that you are using). Think of the pipe as simply <strong>connecting two Unix programs</strong>. In this next example we send the output from <code>grep</code> down a pipe to the less program. Let&#8217;s imagine that we just want to see lines in the input file which contain the pattern &#8220;ATGTGA&#8221; (a potential start and stop codon combined):</p>
 
 <pre><code>$ grep &quot;ATGTGA&quot; intron_IME_data.fasta | less
 
@@ -841,7 +843,7 @@ GTATGTGAGCAAACGATGTCTCGTTTTCTCTCTCTCAATGATCAAGCACCTAACTTAAAT\
 .
 </code></pre>
 
-<p>Notice that you still have control of your output as you are now in the <code>less</code> program. If you press the forward slash (/) key in <code>less</code>, you can then specify a search pattern. Type ATGTGA after the slash and press enter. The <code>less</code> program will highlight the location of these matches on each line. Note that <code>grep</code> matches patterns on a per line basis. So if one line ended ATG and the next line started TGA, then <code>grep</code> would not find it.</p>
+<p>Notice that you still have control of your output as you are now in the <code>less</code> program. If you press the forward slash (/) key in <code>less</code>, you can then specify a search pattern. Type ATGTGA after the slash and press enter. The <code>less</code> program will highlight the location of these matches on each line. Note that <code>grep</code> matches patterns on a <strong>per line basis</strong>. So if one line ended ATG and the next line started TGA, then <code>grep</code> would not find it.</p>
 
 <blockquote>
 <p><strong><em>Any time you run a Unix program or command that outputs a lot of text to the screen, you can instead pipe that output into the <code>less</code> program.</em></strong></p>
@@ -872,7 +874,7 @@ chr1.fasta:ACGTCGAAGGGGGTAAGATTGCAGCTAATCATTTGATGAAATGGATTGGGATTCACGTGGAGGATGATC
 
 <h2 id="u36">U36: Getting fancy with regular expressions</h2>
 
-<p>A concept that is supported by many Unix programs and also by most programming languages (including Perl) is that of using <a href="http://en.wikipedia.org/wiki/Regular_expression">regular expressions</a>. These allow you to specify search patterns which are quite complex and really help restrict the huge amount of data that you might be searching for to some very specific lines of output. E.g. you might want to find lines that start with an &#8216;ATG&#8217; and finish with &#8216;TGA&#8217; but which have at least three AC dinucleotides in the middle:</p>
+<p>A concept that is supported by many Unix programs and also by most programming languages is that of using <a href="http://en.wikipedia.org/wiki/Regular_expression">regular expressions</a>. These allow you to specify search patterns which are quite complex and really help restrict the huge amount of data that you might be searching for to some very specific lines of output. E.g. you might want to find lines that start with an &#8216;ATG&#8217; and finish with &#8216;TGA&#8217; but which have at least three AC dinucleotides in the middle:</p>
 
 <pre><code>$ grep &quot;^ATG.*ACACAC.*TGA$&quot; chr1.fasta
 
@@ -881,7 +883,9 @@ ATGATAGCTCAACCACGAAATGTCATTACCTGAAACCCTTAAACACACTCTACCTCAAACTTACTGGTAAAAACATTGA
 ATGCATACCTCAGTTGCATCCCGGCGCAGGGCAAGCATACCCGCTTCAACACACACTGCTTTGAGTTGAGCTCCATTGA
 </code></pre>
 
-<p>You&#8217;ll learn more about regular expressions when you learn Perl. The <code>^</code> character is a special character that tells <code>grep</code> to only match a pattern if it occurs at the start of a line. Similarly, the <code>$</code> tells <code>grep</code> to match patterns that occur at the end of the line.</p>
+<p>The <code>^</code> character is a special character that tells <code>grep</code> to only match a pattern if it occurs at the start of a line. Similarly, the <code>$</code> tells <code>grep</code> to match patterns that occur at the end of the line.</p>
+
+<p>For learning more about regular expressions, check out <a href="http://rubular.com/">rubular.com</a>. It is made for regular expressions in the <a href="http://www.ruby-lang.org/en/">Ruby</a> scripting language, but can be useful in trying out general regular expressions.</p>
 
 <h4 id="u36.1">Task U36.1</h4>
 
@@ -901,12 +905,12 @@ AC.*GT
 
 <pre><code>A...T 
 AG*T 
-A*C*G*T*
+A*C*G*T*
 </code></pre>
 
 <hr />
 
-<h2 id="u37">U37: Counting with <code>grep</code></h2>
+<h2 id="u37">U37: Counting with grep</h2>
 
 <p>Rather than showing you the lines that match a certain pattern, <code>grep</code> can also just give you a count of how many lines match. This is one of the frequently used <code>grep</code> options. Running <code>grep -c</code> simply counts how many lines match the specified pattern. It doesn&#8217;t show you the lines themselves, just a number:</p>
 
@@ -920,7 +924,7 @@ A*C*G*T*
 
 <hr />
 
-<h2 id="u38">U38: Regular expressions in <code>less</code></h2>
+<h2 id="u38">U38: Regular expressions in less</h2>
 
 <p>You have seen already how you can use <code>less</code> to view files, and also to search for patterns. If you are viewing a file with <code>less</code>, you can type a forward-slash <code>/</code> character, and this allows you to then specify a pattern and it will then search for (and highlight) all matches to that pattern. Technically it is searching forward from whatever point you are at in the file. You can also type a question-mark <code>?</code> and <code>less</code> will allow you to search backwards. The real bonus is that the patterns you specify can be regular expressions.</p>
 
@@ -967,7 +971,8 @@ $ head -n 1 chr1.fasta | sed 's/Chr1/Chromosome 1/' &gt;Chromosome 1 dumped from
 
 <p>For this section we want to work with a different type of file. It is sometimes good to get a feeling for how large a file is before you start running lots of commands against it. The <code>ls -l</code> command will tell you how big a file is, but for many purposes it is often more desirable to know how many &#8216;lines&#8217; it has. That is because many Unix commands like <code>grep</code> and <code>sed</code> work on a line by line basis. Fortunately, there is a simple Unix command called <a href="http://en.wikipedia.org/wiki/Wc_(Unix)">wc</a> (word count) that does this:</p>
 
-<pre><code>$ cd Data/Arabidopsis/ $ wc At_genes.gff 531497 4783473 39322356 At_genes.gff
+<pre><code>$ cd Data/Arabidopsis/ $ wc At_genes.gff 
+531497 4783473 39322356 At_genes.gff
 </code></pre>
 
 <p>The three numbers in the output above count the number of lines, words and bytes in the specified file(s). If we had run <code>wc -l</code>, the <code>-l</code> option would have shown us just the line count.</p>
@@ -978,7 +983,7 @@ $ head -n 1 chr1.fasta | sed 's/Chr1/Chromosome 1/' &gt;Chromosome 1 dumped from
 
 <p>The Arabidopsis directory also contains a <a href="http://www.sanger.ac.uk/Software/formats/GFF/">GFF file</a>. This is a common file format in bioinformatics and GFF files are used to describe the location of various features on a DNA sequence. Features can be exons, genes, binding sites etc, and the sequence can be a single gene or (more commonly) an entire chromosome.</p>
 
-<p>This GFF file describes of all of the gene-related features from chromosome I of <em>A. thaliana</em>. We want to play around with some of this data, but don&#8217;t need all of the file&#8230;just 10,000 lines will do (rather than the ~500,000 lines in the original). We will create a new (smaller) file that contains a subset of the original:</p>
+<p>This GFF file describes of all of the gene-related features from chromosome I of <em>A. thaliana</em>. We want to play around with some of this data, but don&#8217;t need all of the file&#8230;just 10,000 lines will do (rather than the ~500,000 lines in the original). We will create a new (smaller) file that contains a subset of the original:</p>
 
 <pre><code>$ head -n 10000 At_genes.gff &gt; At_genes_subset.gff 
 $ ls -l 
@@ -990,7 +995,7 @@ total 195360
 -rwxrwxrwx  1 keith  staff  11330285 Jul 10 11:11 intron_IME_data.fasta
 </code></pre>
 
-<p>This step introduces a new concept. Up till now we have sent the output of any command to the screen (this is the default behavior of Unix commands), or through a pipe to another program. Sometimes you just want to redirect the output into an actual file, and that is what the <code>&gt;</code> symbol is doing, it acts as one of three <a href="http://en.wikipedia.org/wiki/Redirection_(Unix)">redirection operators</a> in Unix.</p>
+<p>This step introduces a new concept. Up till now we have sent the output of any command to the screen (this is the default behavior of Unix commands), or through a pipe to another program. Sometimes you just want to <strong>redirect the output</strong> into an actual file, and that is what the <code>&gt;</code> symbol is doing, it acts as one of three <a href="http://en.wikipedia.org/wiki/Redirection_(Unix)">redirection operators</a> in Unix.</p>
 
 <p>As already mentioned, the GFF file that we are working with is a standard file format in bioinformatics. For now, all you really need to know is that every GFF file has 9 fields, each separated with a tab character. There should always be some text at every position (even if it is just a &#8216;.&#8217; character). The last field often is used to store a lot of text.</p>
 
@@ -1052,7 +1057,7 @@ CDS 4486
 
 <p>When you press the return/enter key on your keyboard you may think that this causes the same effect no matter what computer you are using. The visible effects of hitting this key are indeed the same&#8230;if you are in a word processor or text editor, then your cursor will move down one line. However, behind the scenes pressing enter will generate one of two different events (depending on what computer you are using). Technically speaking, pressing enter generates a newline character which is represented internally by either a <em>line feed or carriage return</em> character (actually, Windows uses a combination of both to represent a newline). If this is all sounding confusing, well it is, and it is <a href="http://en.wikipedia.org/wiki/Newline">even more complex</a> than we are revealing here.</p>
 
-<p>The relevance of this to Unix is that you will sometimes receive a text file from someone else which looks fine on their computer, but looks unreadable in the Unix text viewer that you are using. In Unix (and in Perl and other programming languages) the patterns <code>\n</code> and <code>\r</code> can both be used to denote newlines. A common fix for this requires substituting <code>\r</code> for <code>\n</code>.</p>
+<p>The relevance of this to Unix is that you will sometimes receive a text file from someone else which looks fine on their computer, but looks unreadable in the Unix text viewer that you are using. In Unix (and in programming languages) the patterns <code>\n</code> and <code>\r</code> can both be used to denote newlines. A common fix for this requires substituting <code>\r</code> for <code>\n</code>.</p>
 
 <p>Use <code>less</code> to look at the Data/Misc/excel_data.csv file. This is a simple 4-line file that was exported from a Mac version of Microsoft Excel. You should see that if you use <code>less</code>, then this appears as one line with the newlines replaced with ^M characters. You can convert these carriage returns into Unix-friendly line-feed characters by using the tr command like so:</p>
 
@@ -1086,7 +1091,7 @@ sequence 4,cacaccaaacac
 
 <p>We can use <code>grep</code> to find header lines that match these terms, but this will not let us extract the associated sequences. The distance to the TSS is the number in the FASTA header which comes after the intron position. So we want to find the five introns which have the lowest values.</p>
 
-<p>Before I show you one way of doing this in Unix, think for a moment how you would go about this if you didn&#8217;t know any Unix or Perl&#8230;would it even be something you could do without manually going through a text file and selecting each sequence by eye? Note that this Unix command is so long that &#8212; depending on how you are viewing this document &#8212; it may appear to wrap across two lines. When you type this, it should all be on a single line:</p>
+<p>Before I show you one way of doing this in Unix, think for a moment how you would go about this if you didn&#8217;t know any Unix or a programming language&#8230;would it even be something you could do without manually going through a text file and selecting each sequence by eye? Note that this Unix command is so long that &#8212; depending on how you are viewing this document &#8212; it may appear to wrap across two lines. When you type this, it should all be on a single line:</p>
 
 <pre><code>$ tr '\n' '@' &lt; intron_IME_data.fasta | sed 's/&gt;/#&gt;/g' | tr '#' '\n' | grep &quot;i1_.*5UTR&quot; | sort -nk 3 -t &quot;_&quot; | head -n 5 | tr '@' '\n'
 
@@ -1117,7 +1122,7 @@ TTTTTCTTGTTCTTATATTGTAGTTGCAAGAAAGTTAAAAGATTTTGACTTTTCTTGTTT
 CAG
 </code></pre>
 
-<p>That&#8217;s a long command, but it does a lot. Try to break down each step and work out what it is doing (you will need to consult the man page for some commands maybe). Notice that I use one of the other redirect operators <code>&lt;</code> to read from a file. It took seven Unix commands to do this, but these are all relatively simple Unix commands; it is the combination of them together which makes them so powerful. One might argue that when things get this complex with Unix that it might be easier to do it in Perl!</p>
+<p>That&#8217;s a long command, but it does a lot. Try to break down each step and work out what it is doing (you will need to consult the man page for some commands maybe). Notice that I use one of the other redirect operators <code>&lt;</code> to read from a file. It took seven Unix commands to do this, but these are all relatively simple Unix commands; it is the combination of them together which makes them so powerful. One might argue that when things get this complex with Unix that it might be easier to do it in a scripting language like Ruby or Perl!</p>
 
 <hr />
 
@@ -1139,10 +1144,10 @@ CAG
 
 <thead>
 <tr>
-	<th style="text-align:center;">The absolute basics</th>
+	<th style="text-align:center;">Basics</th>
 	<th style="text-align:center;">File control</th>
-	<th style="text-align:center;">Viewing, creating, or editing files</th>
-	<th style="text-align:center;">Misc. useful commands</th>
+	<th style="text-align:center;">Files</th>
+	<th style="text-align:center;">Useful commands</th>
 	<th style="text-align:center;">Power commands</th>
 	<th style="text-align:center;">Process-related commands</th>
 </tr>

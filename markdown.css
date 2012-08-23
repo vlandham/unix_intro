@@ -63,9 +63,10 @@ ul, ol {
     max-width: 540px;
 }
 pre {
-    padding: 0px 24px;
+    padding: 10px 24px 10px 10px;
     max-width: 800px;
     white-space: pre-wrap;
+    background-color: #F8F8F8;
 }
 code {
     font-family: Consolas, Monaco, Andale Mono, monospace;
@@ -192,6 +193,28 @@ textarea {
 }
 ::-webkit-input-placeholder {
   color: #bfbfbf;
+}
+
+table {
+border-collapse: collapse;
+margin: 20px 0 0;
+padding: 0;
+}
+table tr th, table tr td {
+border: 1px solid #CCC;
+text-align: left;
+margin: 0;
+padding: 6px 13px;
+}
+
+table tr:nth-child(2n) {
+background-color: #F8F8F8;
+}
+table tr {
+border-top: 1px solid #CCC;
+background-color: white;
+margin: 0;
+padding: 0;
 }
 
 input[type=text],

@@ -2,7 +2,7 @@
 
 # Unix Primer for Biologists 
 
-## Adapted for Stowers
+## Adapted for Stowers Institute
 
 ---
 
@@ -11,6 +11,8 @@
 + [Why Unix]
 + [Part 1] --- Unix - Learning the essentials
 + [Part 2] --- Advanced Unix 
+
+<br/>
 	
 ---
 
@@ -236,8 +238,8 @@ Hopefully, you should find that `cd` and `cd ~` do the same thing, i.e. they tak
 
 The `..` operator that we saw earlier can also be used with the `ls` command. Can you see how the following command is listing the contents of the root directory? If you want to test this, try running `ls /` and see if the output is any different.
 
-	$ cd /Volumes/USB/Unix_and_Perl_course 
-	$ ls ../../.. 
+	$ cd /Users/Shared
+	$ ls ../.. 
 	Applications	Volumes		net
 	CRC				bin			oldlogins 
 	Developer		cores		private
@@ -470,7 +472,7 @@ I.e. imagine if you had to type the following (to access a buried directory 'ggg
 	
 ## U21: The most dangerous Unix command you will ever learn! [U21]
 
-You've seen how to remove a directory with the `rmdir` command, but `rmdir` won't remove directories if they contain any files. So how can we remove the files we have created (in /Volumes/USB/Unix_and_Perl_course/Temp)? In order to do this, we will have to use the [rm][] (remove) command.
+You've seen how to remove a directory with the `rmdir` command, but `rmdir` won't remove directories if they contain any files. So how can we remove the files we have created (just the temporary ones for this tutorial )? In order to do this, we will have to use the [rm][] (remove) command.
 
 >***Please read the next section VERY carefully. Misuse of the rm command can lead to needless death & destruction*** 
 
@@ -618,7 +620,7 @@ While we are connected to `genekc03`, let's copy over some files to your home di
 
 #### Task U26.1 [U26.1]
 
-There is a directory at `/n/core/Bioinformatics` called `Unix_Course` . *Copy* it and all of its contents to your home directory. Try to do it without moving into the `/n/core/Bioinformatics` directory at all.
+There is a directory at `/n/core/Bioinformatics` called `unix_intro` . *Copy* it and all of its contents to your home directory. Try to do it without moving into the `/n/core/Bioinformatics` directory at all.
 
 ---
 
@@ -627,7 +629,7 @@ There is a directory at `/n/core/Bioinformatics` called `Unix_Course` . *Copy* i
 So far we have covered listing the contents of directories and moving/copying/deleting either files and/or directories. Now we will quickly cover how you can look at files; in Unix the [less][less command] command lets you view (but not edit) text files. Let's take a look at a file of _Arabidopsis thaliana_ protein sequences:
 
 	$ ssh genekc03
-	$ cd ~/Unix_Course
+	$ cd ~/unix_intro
 	$ less Data/Arabidopsis/At_proteins.fasta
 
 When you are using less, you can bring up a page of help commands by pressing `h`, scroll forward a page by pressing `space`, or go forward or backwards one line at a time by pressing `j` or `k`. To exit less, press `q` (for quit). The `less` program also does about a million other useful things (including text searching).
@@ -741,10 +743,10 @@ The commands that you have learnt so far are essential for doing any work in Uni
 
 ## U32: Get back to genekc03 [U32]
 
-First lets get back to `genekc03` and into our `Unix_Course` directory.
+First lets get back to `genekc03` and into our `unix_intro` directory.
 
 	$ ssh genekc03
-	$ cd ~/Unix_Course
+	$ cd ~/unix_intro
 
 ---
 
@@ -785,7 +787,7 @@ This will produce lots of output which will flood past your screen. If you ever 
 
 By now, you might be getting a bit fed up of waiting for the `grep` command to finish, or you might want a cleaner way of controlling things without having to reach for Ctrl-C. Ideally, you might want to look at the output from any command in a controlled manner, i.e. you might want to use a Unix program like less to view the output.
 
-This is very easy to do in Unix, you can send the output from any command to any other Unix program (as long as the second program accepts input of some sort). We do this by using what is known as a [pipe][]. This is implemented using the '|' character (which is a character which always seems to be on different keys depending on the keyboard that you are using). Think of the pipe as simply connecting two Unix programs. In this next example we send the output from `grep` down a pipe to the less program. Let's imagine that we just want to see lines in the input file which contain the pattern "ATGTGA" (a potential start and stop codon combined):
+This is very easy to do in Unix, you can send the output from any command to any other Unix program (as long as the second program accepts input of some sort). We do this by using what is known as a [pipe][]. This is implemented using the '|' character (which is a character which always seems to be on different keys depending on the keyboard that you are using). Think of the pipe as simply **connecting two Unix programs**. In this next example we send the output from `grep` down a pipe to the less program. Let's imagine that we just want to see lines in the input file which contain the pattern "ATGTGA" (a potential start and stop codon combined):
 
 	$ grep "ATGTGA" intron_IME_data.fasta | less
 
@@ -802,7 +804,7 @@ This is very easy to do in Unix, you can send the output from any command to any
 	.
 	.
 
-Notice that you still have control of your output as you are now in the `less` program. If you press the forward slash (/) key in `less`, you can then specify a search pattern. Type ATGTGA after the slash and press enter. The `less` program will highlight the location of these matches on each line. Note that `grep` matches patterns on a per line basis. So if one line ended ATG and the next line started TGA, then `grep` would not find it.
+Notice that you still have control of your output as you are now in the `less` program. If you press the forward slash (/) key in `less`, you can then specify a search pattern. Type ATGTGA after the slash and press enter. The `less` program will highlight the location of these matches on each line. Note that `grep` matches patterns on a **per line basis**. So if one line ended ATG and the next line started TGA, then `grep` would not find it.
 
 >***Any time you run a Unix program or command that outputs a lot of text to the screen, you can instead pipe that output into the `less` program.***
 
@@ -835,7 +837,7 @@ The `*` character acts as a wildcard meaning 'search all files in the current di
 
 ## U36: Getting fancy with regular expressions [U36]
 
-A concept that is supported by many Unix programs and also by most programming languages (including Perl) is that of using [regular expressions][regex]. These allow you to specify search patterns which are quite complex and really help restrict the huge amount of data that you might be searching for to some very specific lines of output. E.g. you might want to find lines that start with an 'ATG' and finish with 'TGA' but which have at least three AC dinucleotides in the middle:
+A concept that is supported by many Unix programs and also by most programming languages is that of using [regular expressions][regex]. These allow you to specify search patterns which are quite complex and really help restrict the huge amount of data that you might be searching for to some very specific lines of output. E.g. you might want to find lines that start with an 'ATG' and finish with 'TGA' but which have at least three AC dinucleotides in the middle:
 
 	$ grep "^ATG.*ACACAC.*TGA$" chr1.fasta
 
@@ -843,7 +845,9 @@ A concept that is supported by many Unix programs and also by most programming l
 	ATGATAGCTCAACCACGAAATGTCATTACCTGAAACCCTTAAACACACTCTACCTCAAACTTACTGGTAAAAACATTGA
 	ATGCATACCTCAGTTGCATCCCGGCGCAGGGCAAGCATACCCGCTTCAACACACACTGCTTTGAGTTGAGCTCCATTGA
 
-You'll learn more about regular expressions when you learn Perl. The `^` character is a special character that tells `grep` to only match a pattern if it occurs at the start of a line. Similarly, the `$` tells `grep` to match patterns that occur at the end of the line.
+The `^` character is a special character that tells `grep` to only match a pattern if it occurs at the start of a line. Similarly, the `$` tells `grep` to match patterns that occur at the end of the line.
+
+For learning more about regular expressions, check out [rubular.com][]. It is made for regular expressions in the [Ruby][] scripting language, but can be useful in trying out general regular expressions.
 
 #### Task U36.1 [U36.1]
 The `.` and `*` characters are also special characters that form part of the regular expression. Try to understand how the following patterns all differ. Try using each of these these patterns with `grep` against any one of the sequence files. Can you predict which of the five patterns will generate the most matches?
@@ -859,13 +863,14 @@ Try searching for the following patterns to ensure you understand what `.` and `
 
 	A...T 
 	AG*T 
-	A*C*G*T*
+	A*C*G*T*
 
 [regex]: http://en.wikipedia.org/wiki/Regular_expression
-
+[rubular.com]: http://rubular.com/
+[Ruby]: http://www.ruby-lang.org/en/
 ---
 
-## U37: Counting with `grep` [U37]
+## U37: Counting with grep [U37]
 
 Rather than showing you the lines that match a certain pattern, `grep` can also just give you a count of how many lines match. This is one of the frequently used `grep` options. Running `grep -c` simply counts how many lines match the specified pattern. It doesn't show you the lines themselves, just a number:
 
@@ -877,7 +882,7 @@ Count how many times each pattern from Task [U36.1] occurs in all of the sequenc
 
 ---
 
-## U38: Regular expressions in `less` [U38]
+## U38: Regular expressions in less [U38]
 
 You have seen already how you can use `less` to view files, and also to search for patterns. If you are viewing a file with `less`, you can type a forward-slash `/` character, and this allows you to then specify a pattern and it will then search for (and highlight) all matches to that pattern. Technically it is searching forward from whatever point you are at in the file. You can also type a question-mark `?` and `less` will allow you to search backwards. The real bonus is that the patterns you specify can be regular expressions.
 
@@ -925,7 +930,8 @@ The 's' part of the `sed` command puts `sed` in 'substitute' mode, where you spe
 
 For this section we want to work with a different type of file. It is sometimes good to get a feeling for how large a file is before you start running lots of commands against it. The `ls -l` command will tell you how big a file is, but for many purposes it is often more desirable to know how many 'lines' it has. That is because many Unix commands like `grep` and `sed` work on a line by line basis. Fortunately, there is a simple Unix command called [wc][] (word count) that does this:
 
-	$ cd Data/Arabidopsis/ $ wc At_genes.gff 531497 4783473 39322356 At_genes.gff
+	$ cd Data/Arabidopsis/ $ wc At_genes.gff 
+	531497 4783473 39322356 At_genes.gff
 
 The three numbers in the output above count the number of lines, words and bytes in the specified file(s). If we had run `wc -l`, the `-l` option would have shown us just the line count.
 
@@ -937,7 +943,7 @@ The three numbers in the output above count the number of lines, words and bytes
 
 The Arabidopsis directory also contains a [GFF file][gff]. This is a common file format in bioinformatics and GFF files are used to describe the location of various features on a DNA sequence. Features can be exons, genes, binding sites etc, and the sequence can be a single gene or (more commonly) an entire chromosome.
 
-This GFF file describes of all of the gene-related features from chromosome I of _A. thaliana_. We want to play around with some of this data, but don't need all of the file...just 10,000 lines will do (rather than the ~500,000 lines in the original). We will create a new (smaller) file that contains a subset of the original:
+This GFF file describes of all of the gene-related features from chromosome I of _A. thaliana_. We want to play around with some of this data, but don't need all of the file...just 10,000 lines will do (rather than the ~500,000 lines in the original). We will create a new (smaller) file that contains a subset of the original:
 
 	$ head -n 10000 At_genes.gff > At_genes_subset.gff 
 	$ ls -l 
@@ -948,7 +954,7 @@ This GFF file describes of all of the gene-related features from chromosome I of
 	-rwxrwxrwx  1 keith  staff  30817851 May  7  2008 chr1.fasta 
 	-rwxrwxrwx  1 keith  staff  11330285 Jul 10 11:11 intron_IME_data.fasta
 
-This step introduces a new concept. Up till now we have sent the output of any command to the screen (this is the default behavior of Unix commands), or through a pipe to another program. Sometimes you just want to redirect the output into an actual file, and that is what the `>` symbol is doing, it acts as one of three [redirection operators][redirection] in Unix.
+This step introduces a new concept. Up till now we have sent the output of any command to the screen (this is the default behavior of Unix commands), or through a pipe to another program. Sometimes you just want to **redirect the output** into an actual file, and that is what the `>` symbol is doing, it acts as one of three [redirection operators][redirection] in Unix.
 
 As already mentioned, the GFF file that we are working with is a standard file format in bioinformatics. For now, all you really need to know is that every GFF file has 9 fields, each separated with a tab character. There should always be some text at every position (even if it is just a '.' character). The last field often is used to store a lot of text.
 
@@ -1013,7 +1019,7 @@ Here we first cut out just two columns of interest (3 & 4) from the GFF file. Th
 
 When you press the return/enter key on your keyboard you may think that this causes the same effect no matter what computer you are using. The visible effects of hitting this key are indeed the same...if you are in a word processor or text editor, then your cursor will move down one line. However, behind the scenes pressing enter will generate one of two different events (depending on what computer you are using). Technically speaking, pressing enter generates a newline character which is represented internally by either a _line feed or carriage return_ character (actually, Windows uses a combination of both to represent a newline). If this is all sounding confusing, well it is, and it is [even more complex][newlines] than we are revealing here.
 
-The relevance of this to Unix is that you will sometimes receive a text file from someone else which looks fine on their computer, but looks unreadable in the Unix text viewer that you are using. In Unix (and in Perl and other programming languages) the patterns  `\n` and `\r` can both be used to denote newlines. A common fix for this requires substituting `\r` for `\n`.
+The relevance of this to Unix is that you will sometimes receive a text file from someone else which looks fine on their computer, but looks unreadable in the Unix text viewer that you are using. In Unix (and in programming languages) the patterns  `\n` and `\r` can both be used to denote newlines. A common fix for this requires substituting `\r` for `\n`.
 
 Use `less` to look at the Data/Misc/excel_data.csv file. This is a simple 4-line file that was exported from a Mac version of Microsoft Excel. You should see that if you use `less`, then this appears as one line with the newlines replaced with ^M characters. You can convert these carriage returns into Unix-friendly line-feed characters by using the tr command like so:
 
@@ -1045,7 +1051,7 @@ Let's say that we want to extract five sequences from this file that are: a) fro
 
 We can use `grep` to find header lines that match these terms, but this will not let us extract the associated sequences. The distance to the TSS is the number in the FASTA header which comes after the intron position. So we want to find the five introns which have the lowest values.
 
-Before I show you one way of doing this in Unix, think for a moment how you would go about this if you didn't know any Unix or Perl...would it even be something you could do without manually going through a text file and selecting each sequence by eye? Note that this Unix command is so long that --- depending on how you are viewing this document --- it may appear to wrap across two lines. When you type this, it should all be on a single line:
+Before I show you one way of doing this in Unix, think for a moment how you would go about this if you didn't know any Unix or a programming language...would it even be something you could do without manually going through a text file and selecting each sequence by eye? Note that this Unix command is so long that --- depending on how you are viewing this document --- it may appear to wrap across two lines. When you type this, it should all be on a single line:
 
 	$ tr '\n' '@' < intron_IME_data.fasta | sed 's/>/#>/g' | tr '#' '\n' | grep "i1_.*5UTR" | sort -nk 3 -t "_" | head -n 5 | tr '@' '\n'
 
@@ -1075,7 +1081,7 @@ Before I show you one way of doing this in Unix, think for a moment how you woul
 	TTTTTCTTGTTCTTATATTGTAGTTGCAAGAAAGTTAAAAGATTTTGACTTTTCTTGTTT 
 	CAG
 
-That's a long command, but it does a lot. Try to break down each step and work out what it is doing (you will need to consult the man page for some commands maybe). Notice that I use one of the other redirect operators `<` to read from a file. It took seven Unix commands to do this, but these are all relatively simple Unix commands; it is the combination of them together which makes them so powerful. One might argue that when things get this complex with Unix that it might be easier to do it in Perl!
+That's a long command, but it does a lot. Try to break down each step and work out what it is doing (you will need to consult the man page for some commands maybe). Notice that I use one of the other redirect operators `<` to read from a file. It took seven Unix commands to do this, but these are all relatively simple Unix commands; it is the combination of them together which makes them so powerful. One might argue that when things get this complex with Unix that it might be easier to do it in a scripting language like Ruby or Perl!
 
 ---
 
@@ -1085,7 +1091,7 @@ Congratulations are due if you have reached this far. If you have learnt (and un
 
 The following table provides a reminder of most of the commands that we have covered so far. If you include the three, as-yet-unmentioned, commands in the last column, then you will probably be able to achieve >95% of everything that you will ever want to do in Unix (remember, you can use the `man` command to find out more about `top`, `ps`, and `kill`). The power comes from how you can use combinations of these commands.
 
-The absolute basics	| File control |Viewing, creating, or editing files | Misc. useful commands | Power commands | Process-related commands 
+Basics	| File control |Files | Useful commands | Power commands | Process-related commands 
 :------------------:|:------------:|:----------------------------------:|:---------------------:|:--------------:|:-----------------------------:|
 ls    | mv	               | less  | man    | uniq   | top   |
 cd    | cp	               | head  | chmod  | sort   | ps    |
