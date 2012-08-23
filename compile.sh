@@ -1,3 +1,3 @@
 #!/bin/bash
 
-mmd unix.markdown
+mmd index.markdown
